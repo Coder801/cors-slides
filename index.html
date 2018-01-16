@@ -15,7 +15,7 @@
 	</header>
 
 	<section class="slide" id="cover">
-		<h2 class="shout shrink">Кросс-доменные коммуникации</h2>
+		<h2 class="shout shrink">Философия REST и Кросс-доменные коммуникации</h2>
 		<figure>
 			<img class="cover" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/JrbItQz/glowing-futuristic-network-shape-loopable-background-4k-4096x2304_nvzq1ms0g__F0000.png" alt="Hands on the orange typewriter in a park">
 		</figure>
@@ -39,6 +39,57 @@
 						max-width: 111%
 					}
 		</style>
+	</section>
+
+	<section class="slide">
+		<h2>Что такое запрос?</h2>
+	</section>
+
+	<section class="slide">
+		<h2>Структура HTTP запроса?</h2>
+		<ul>
+			<li><strong>Строка запроса*</strong> — указан метод запроса (HTTP-метод), URI, версия протокола</li>
+			<li><strong>Заголовки</strong> — набор пар имя-значение. В заголовках передается различная служебная информация</li> 
+			<li><strong>Тело сообщения</strong> — данные сообщения</li>
+		</ul>
+	</section>
+
+	<section class="slide">
+		<h2>Пример запроса</h2>
+		<pre>
+			<code><mark>GET</mark> /index.php HTTP/1.1</code>
+			<code>Host: example.com</code>
+			<code>User-Agent: Mozilla/5.0 (X11; U; ...</code>
+			<code>Accept: text/html</code>
+			<code>Connection: close</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Пример ответа</h2>
+		<pre>
+			<code>HTTP/1.0 200 OK</code>
+			<code>Server: nginx/0.6.31</code>
+			<code>Content-Language: ru</code>
+			<code>Content-Type: text/html; charset=utf-8</code>
+			<code>Content-Length: 1234</code>
+			<code>Connection: close</code>
+			<code>... САМА HTML-СТРАНИЦА ...</code>
+		</pre>
+	</section>
+
+	<section class="slide">
+		<h2>Методы HTTP</h2>
+		<p>Метод указывает какая операция будет производится над ресурсом. В спецификации HTTP 1.1 определены следующие методы: OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, LINK, UNLINK. </p>
+		<p>HTTP методы составляют основную часть "единого интерфейса", ограничивающего и предоставляющего возможность осуществлять действия над существительным-ресурсом.</p>
+	</section>
+
+	<section class="slide">
+		<h2>Основные HTTP методы (CRUD)</h2>
+		<p>Метод GET — используется для запроса содержимого указанного ресурса. Это с его помощью браузер получает HTML код конкретной страницы и все ее объекты (изображения, CSS и т.п)</p>
+		<p>Метод POST — предназначен для передачи данных на сервер. Тело такого запроса обычно содержит данные. Сообщение ответа сервера на выполнение метода POST не кэшируется</p>
+		<p>Метод PUT — служит для обновления ресурса. Тело запроса при отправке PUT-запроса к существующему ресурсу URI должно содержать обновленные данные оригинального ресурса</p>
+		<p>Meтод DELETE — используется для удаления ресурса, идентифицированного конкретным URI (ID)</p>
 	</section>
 
 	<section class="slide">
