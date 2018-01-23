@@ -15,7 +15,7 @@
 	</header>
 
 	<section class="slide" id="cover">
-		<h2 class="shout shrink">Философия REST и Кросс-доменные коммуникации</h2>
+		<h2 class="shout shrink">HTTP, REST и Кросс-доменные коммуникации</h2>
 		<figure>
 			<img class="cover" src="https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/JrbItQz/glowing-futuristic-network-shape-loopable-background-4k-4096x2304_nvzq1ms0g__F0000.png" alt="Hands on the orange typewriter in a park">
 		</figure>
@@ -42,14 +42,27 @@
 	</section>
 
 	<section class="slide">
-		<h2>Что такое запрос?</h2>
+		<h2>Протокол HTTP</h2>
+		<p>HTTP (HyperText Transfer Protocol) - Этот протокол описывает взаимодействие между двумя компьютерами (клиентом и сервером), построенное на базе сообщений, называемых запрос (Request) и ответ (Response).</p>
+	</section>
+
+	<section class="slide">
+		<h2>Как работает HTTP соединение</h2>
+		<p>Запрос происходит в несколько этапов:</p>
+		<ul>
+			<li>DNS-запрос — поиск ближайшего DNS-сервера</li>
+			<li>Отправка данных</li>
+			<li>Ожидание ответа (TTFB)</li>
+			<li>Получение данных.</li>
+		</ul>
 	</section>
 
 	<section class="slide">
 		<h2>Структура HTTP запроса?</h2>
-		<ul>
+		<p style="font-size: 22px">Каждое сообщение состоит из трех частей: стартовая строка, заголовки и тело.</p>
+		<ul style="font-size: 22px">
 			<li><strong>Строка запроса*</strong> — указан метод запроса (HTTP-метод), URI, версия протокола</li>
-			<li><strong>Заголовки</strong> — набор пар имя-значение. В заголовках передается различная служебная информация</li> 
+			<li><strong>Заголовки</strong> — набор пар имя-значение. В заголовках передается различная служебная информация (<a href="https://ru.wikipedia.org/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA_%D0%B7%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%BE%D0%B2_HTTP#%D0%97%D0%B0%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%B8_%D0%B7%D0%B0%D0%BF%D1%80%D0%BE%D1%81%D0%B0" target="_blank">Список заголовков</a>)</li> 
 			<li><strong>Тело сообщения</strong> — данные сообщения</li>
 		</ul>
 	</section>
@@ -57,39 +70,57 @@
 	<section class="slide">
 		<h2>Пример запроса</h2>
 		<pre>
-			<code><mark>GET</mark> /index.php HTTP/1.1</code>
+			<code>GET /index.php HTTP/1.1</code>
 			<code>Host: example.com</code>
 			<code>User-Agent: Mozilla/5.0 (X11; U; ...</code>
 			<code>Accept: text/html</code>
+			<code>Accept-Language: en-us,en;q=0.5</code>
 			<code>Connection: close</code>
 		</pre>
 	</section>
 
 	<section class="slide">
 		<h2>Пример ответа</h2>
-		<pre>
-			<code>HTTP/1.0 200 OK</code>
+		<pre style="font-size: 22px;">
+			<code>HTTP/1.x 200 OK</code>
 			<code>Server: nginx/0.6.31</code>
 			<code>Content-Language: ru</code>
 			<code>Content-Type: text/html; charset=utf-8</code>
 			<code>Content-Length: 1234</code>
 			<code>Connection: close</code>
-			<code>... САМА HTML-СТРАНИЦА ...</code>
+			<code>... HTML-СТРАНИЦА ...</code>
 		</pre>
+		<p><a href="https://code.tutsplus.com/ru/tutorials/http-headers-for-dummies--net-8039" target="_blank">Подробнее про заголовки</a></p>
 	</section>
 
 	<section class="slide">
 		<h2>Методы HTTP</h2>
 		<p>Метод указывает какая операция будет производится над ресурсом. В спецификации HTTP 1.1 определены следующие методы: OPTIONS, GET, HEAD, POST, PUT, PATCH, DELETE, TRACE, LINK, UNLINK. </p>
 		<p>HTTP методы составляют основную часть "единого интерфейса", ограничивающего и предоставляющего возможность осуществлять действия над существительным-ресурсом.</p>
+		<p><a href="https://developer.mozilla.org/ru/docs/Web/HTTP/Methods" target="_blank">Подробнее о методах</a></p>
 	</section>
 
 	<section class="slide">
-		<h2>Основные HTTP методы (CRUD)</h2>
-		<p>Метод GET — используется для запроса содержимого указанного ресурса. Это с его помощью браузер получает HTML код конкретной страницы и все ее объекты (изображения, CSS и т.п)</p>
-		<p>Метод POST — предназначен для передачи данных на сервер. Тело такого запроса обычно содержит данные. Сообщение ответа сервера на выполнение метода POST не кэшируется</p>
-		<p>Метод PUT — служит для обновления ресурса. Тело запроса при отправке PUT-запроса к существующему ресурсу URI должно содержать обновленные данные оригинального ресурса</p>
-		<p>Meтод DELETE — используется для удаления ресурса, идентифицированного конкретным URI (ID)</p>
+		<h2>Основные HTTP методы</h2>
+		<p style="font-size: 19px;"><strong>Метод GET</strong> — используется для запроса содержимого указанного ресурса. Это с его помощью браузер получает HTML код конкретной страницы и все ее объекты (изображения, CSS и т.п)</p>
+		<p style="font-size: 19px;"><strong>Метод POST</strong> — предназначен для передачи данных на сервер. Тело такого запроса обычно содержит данные. Сообщение ответа сервера на выполнение метода POST не кэшируется</p>
+		<p style="font-size: 19px;"><strong>Метод HEAD</strong> — Аналогичен GET. Запрашивает только информацию заголовка о файле или ресурсе</p>
+		<p><a href="https://learn.javascript.ru/xhr-crossdomain#%D0%BA%D0%BE%D0%BD%D1%82%D1%80%D0%BE%D0%BB%D1%8C-%D0%B1%D0%B5%D0%B7%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D0%B8" target="_blank">Подробнее о простых запросах</a></p>
+	</section>
+
+	<section class="slide">
+		<h2>Основные HTTP методы</h2>
+		<p style="font-size: 18px;"><strong>Метод PUT</strong> — служит для обновления ресурса. Тело запроса при отправке PUT-запроса к существующему ресурсу URI должно содержать обновленные данные оригинального ресурса</p>
+		<p style="font-size: 18px;"><strong>Meтод DELETE</strong> — используется для удаления ресурса, идентифицированного конкретным URI (ID)</p>
+		<p style="font-size: 18px;"><strong>Meтод PATCH</strong> — Аналогично PUT, но применяется только к фрагменту ресурса.</p>
+		<p style="font-size: 18px;"><strong>Meтод TRACE</strong> — Возвращает полученный запрос так, что клиент может увидеть, какую информацию промежуточные серверы добавляют или изменяют в запросе.</p>
+		<p style="font-size: 18px;"><strong>Meтод CONNECT</strong> — Преобразует соединение запроса в прозрачный TCP/IP-туннель, обычно чтобы содействовать установлению защищённого SSL-соединения через нешифрованный прокси.</p>
+	</section>
+
+	<section class="slide">
+		<h2>REST</h2>
+		<p><strong>REST (Representational state transfer)</strong> - Названия группы принципов построения веб-приложений..</p>
+		<p>REST предлагает отказаться от использования одинаковых URI для разных ресурсов (то есть адреса двух разных статей вроде /index.php?article_id=10 и /index.php?article_id=20 — это не REST-way) и использовать разные HTTP-методы для разных действий</p>
 	</section>
 
 	<section class="slide">
